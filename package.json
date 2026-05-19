@@ -1,0 +1,33 @@
+{
+  "name": "api_pdf",
+  "version": "1.0.0",
+  "description": "api responsavel por gerar e editar pdf",
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx --watch src/server.ts"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.0.0",
+    "@fastify/rate-limit": "^10.3.0",
+    "@fastify/swagger": "^9.4.2",
+    "@fastify/swagger-ui": "^5.2.2",
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "bullmq": "^5.76.10",
+    "dotenv": "^17.4.2",
+    "fastify": "^5.8.5",
+    "pdfkit": "^0.18.0",
+    "pg": "^8.21.0",
+    "pino-pretty": "^13.1.3",
+    "redis": "^5.12.1"
+  },
+  "devDependencies": {
+    "@types/pdfkit": "^0.17.6",
+    "@types/pg": "^8.20.0",
+    "prisma": "^7.8.0"
+  }
+}
