@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.8.0",
   "engineVersion": "3c6e192761c0362d496ed980de936e2f3cebcd3a",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Get a free hosted Postgres database in seconds: `npx create-db`\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"./generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel pdf {\n  id         String    @id @default(uuid())\n  name       String\n  path       String\n  size       Int\n  createAt   DateTime\n  updated_at DateTime\n  deleted_at DateTime?\n}\n",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Get a free hosted Postgres database in seconds: `npx create-db`\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"./generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel pdf {\n  id         String    @id @default(uuid())\n  name       String\n  path       String\n  size       Int\n  createAt   DateTime  @default(now())\n  updated_at DateTime  @updatedAt\n  deleted_at DateTime?\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},

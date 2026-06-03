@@ -290,8 +290,8 @@ export type pdfCreateInput = {
   name: string
   path: string
   size: number
-  createAt: Date | string
-  updated_at: Date | string
+  createAt?: Date | string
+  updated_at?: Date | string
   deleted_at?: Date | string | null
 }
 
@@ -300,8 +300,8 @@ export type pdfUncheckedCreateInput = {
   name: string
   path: string
   size: number
-  createAt: Date | string
-  updated_at: Date | string
+  createAt?: Date | string
+  updated_at?: Date | string
   deleted_at?: Date | string | null
 }
 
@@ -330,8 +330,8 @@ export type pdfCreateManyInput = {
   name: string
   path: string
   size: number
-  createAt: Date | string
-  updated_at: Date | string
+  createAt?: Date | string
+  updated_at?: Date | string
   deleted_at?: Date | string | null
 }
 

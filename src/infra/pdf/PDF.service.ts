@@ -1,38 +1,65 @@
 import PDFDocument from "pdfkit";
 import fs from "fs";
+import path from "path";
 
 export class PDFService {
   constructor() {}
 
   async createPDF(
-    path: string,
+    dirPath: string,
     name: string,
     image?: { path: string; width: number },
     text?: { data: string; x: number; y: number }[],
-  ): Promise<void> {
-    const doc = new PDFDocument({ size: "A4", margin: 0, font: "Times-Roman" });
+  ): Promise<{ fullPath: string; size: number }> {
+    return new Promise((resolve, reject) => {
+      // Garante que o diretório existe
+      if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+      }
 
-    // Cria o arquivo PDF
-    doc.pipe(fs.createWriteStream(`${path}/${name}.pdf`));
+      const fullPath = `${dirPath}/${name}.pdf`;
+      const doc = new PDFDocument({ size: "A4", margin: 0, font: "Times-Roman" });
 
-    if (image) {
-      doc.image(image.path, {
-        width: image.width,
-        align: "center",
-        valign: "center",
+      const writeStream = fs.createWriteStream(fullPath);
+
+      writeStream.on("finish", () => {
+        const actualSize = fs.statSync(fullPath).size;
+        resolve({ fullPath, size: actualSize });
       });
-    }
 
-    if (text) {
-      text.forEach((item) => {
-        doc
-          .font("Times-Roman")
-          .fontSize(12)
-          .text(item.data, item.x, item.y);
+      writeStream.on("error", reject);
+      doc.on("error", reject);
+
+      doc.pipe(writeStream);
+
+      if (image) {
+        doc.image(image.path, {
+          width: image.width,
+          align: "center",
+          valign: "center",
+        });
+      }
+
+      if (text) {
+        text.forEach((item) => {
+          doc
+            .font("Times-Roman")
+            .fontSize(12)
+            .text(item.data, item.x, item.y);
+        });
+      }
+
+      doc.end();
+    });
+  }
+
+  async readPDFAsBuffer(filePath: string): Promise<Buffer> {
+    return new Promise((resolve, reject) => {
+      fs.readFile(filePath, (err, data) => {
+        if (err) reject(err);
+        else resolve(data);
       });
-    }
-
-    doc.end();
+    });
   }
 
   async PDFToBuffer(path: string): Promise<Buffer> {

@@ -1,26 +1,53 @@
-import { createWriteStream, readFileSync } from "node:fs";
-import PDFDocument from "pdfkit";
+import path from "path";
 import { PDFService } from "../../infra/pdf/PDF.service.js";
+import { PDFRepository } from "../../infra/database/pdf.repository.js";
+import { DataMapper } from "../../infra/pdf/DataMapper.js";
+import { CreatePDFRequestDTO, CreatePDFResponseDTO } from "../domain/dto/CreatePDFRequest.dto.js";
 
 export default class CreateUseCase {
-  async execute() {
-    const PDF_PATH = "public/modelos/esporte/carterinhas";
-    const MODELO_PATH = "public/modelos/esporte/modeloEsporte.png";
-    const PDF_Service = new PDFService()
+  private pdfService: PDFService;
+  private pdfRepository: PDFRepository;
+
+  constructor() {
+    this.pdfService = new PDFService();
+    this.pdfRepository = new PDFRepository();
+  }
+
+  async execute(request: CreatePDFRequestDTO): Promise<CreatePDFResponseDTO> {
+    const modelType = request.modelType || "esporte";
+    const PDF_PATH = path.resolve("public/modelos/esporte/carterinhas");
+    const MODELO_PATH = path.resolve("public/modelos/esporte/modeloEsporte.png");
+
+    const textData = DataMapper.mapByModelType(modelType, request.entityData);
+    const safeName = request.name.replace(/[<>:"/\\|?*]+/g, "-");
 
     const image = {
       path: MODELO_PATH,
       width: 590,
     };
 
-    const text = [
-      { data: "Migudel Angelo Morciella Moraes", x: 30, y: 53 },
-      { data: "4000", x: 315, y: 53 },
-      { data: "Jd Itapecerica", x: 360, y: 53 },
-      { data: "12345-678", x: 510, y: 53 },
-    ];
+    try {
+      const { fullPath, size } = await this.pdfService.createPDF(
+        PDF_PATH,
+        safeName,
+        image,
+        textData,
+      );
 
-    const pdf = await PDF_Service.createPDF(PDF_PATH, "test", image, text);
-    return pdf
+      const pdfRecord = await this.pdfRepository.savePDF(
+        request.name,
+        fullPath,
+        size,
+      );
+
+      return {
+        id: pdfRecord.id,
+        name: pdfRecord.name,
+        message: "PDF criado com sucesso",
+      };
+    } catch (error) {
+      console.error("Erro ao criar PDF:", error);
+      throw new Error(`Falha ao criar PDF: ${error}`);
+    }
   }
 }
