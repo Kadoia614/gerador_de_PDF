@@ -1,8 +1,11 @@
-import { PrismaClient } from "./prisma/generated/prisma/client.ts";
+import { PrismaClient } from "./prisma/generated/prisma/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { DATABASE_URL } from "../../core/env.js";
+import { PDFMetadata } from "../../core/application/dto/CreatePDFRequest.dto.js";
+import PDF from "../../core/domain/entity/PDF.js";
+import PDFRepository from "../../core/domain/repository/PDFRepository.repository.js";
 
-export class PDFRepository {
+export class PDFPrismaRepository implements PDFRepository {
   private prisma: PrismaClient;
 
   constructor() {
@@ -12,36 +15,50 @@ export class PDFRepository {
   }
 
   async savePDF(name: string, path: string, size: number) {
-    return await this.prisma.pdf.create({
+    const newData = await this.prisma.pdf.create({
       data: {
         name,
         path,
         size,
       },
     });
+    return this.toEntity(newData);
   }
 
   async getPDFByUuid(id: string) {
-    return await this.prisma.pdf.findUnique({
-      where: { id },
+    const response = await this.prisma.pdf.findUnique({
+      where: { id, deleted_at: null },
     });
+
+    if (!response) {
+      return null;
+    }
+
+    return this.toEntity(response);
   }
 
   async deletePDF(id: string) {
-    return await this.prisma.pdf.update({
+    const response = await this.prisma.pdf.update({
       where: { id },
       data: {
         deleted_at: new Date(),
       },
     });
+    return Boolean(response);
   }
 
   async listAllPDFs() {
-    return await this.prisma.pdf.findMany({
+    const pdf =await this.prisma.pdf.findMany({
       where: {
         deleted_at: null,
       },
     });
+    return pdf.map((data: any) => this.toEntity(data));
+  }
+
+  toEntity(data: PDFMetadata) {
+    const pdf = new PDF(data.id, data.name, data.path, data.size, data.created_at, data.updated_at, data.deleted_at);
+    return pdf;
   }
 
   async closePrisma() {

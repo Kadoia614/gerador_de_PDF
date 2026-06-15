@@ -1,14 +1,14 @@
-import { PDFRepository } from "../../infra/database/pdf.repository.js";
-import { PDFService } from "../../infra/pdf/PDF.service.js";
-import { GetPDFResponseDTO } from "../domain/dto/CreatePDFRequest.dto.js";
+import PDFRepository from "../domain/repository/PDFRepository.repository.js";
+import PDFServiceRepository from "../domain/repository/PDFService.repository.js";
+import { GetPDFResponseDTO } from "./dto/CreatePDFRequest.dto.js";
 
 export default class GetByUuidUseCase {
+  private pdfService: PDFServiceRepository;
   private pdfRepository: PDFRepository;
-  private pdfService: PDFService;
 
-  constructor() {
-    this.pdfRepository = new PDFRepository();
-    this.pdfService = new PDFService();
+  constructor(PDFService: PDFServiceRepository, PDFRepository: PDFRepository) {
+    this.pdfService = PDFService;
+    this.pdfRepository = PDFRepository;
   }
 
   async execute(uuid: string): Promise<GetPDFResponseDTO> {

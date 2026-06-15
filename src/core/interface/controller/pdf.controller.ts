@@ -2,7 +2,11 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import GetByUuidUseCase from "../../application/getByUuid.use-case.js";
 import CreateUseCase from "../../application/create.use-case.js";
 import ListUseCase from "../../application/list.use-case.js";
-import { CreatePDFRequestDTO } from "../../domain/dto/CreatePDFRequest.dto.js";
+
+import { CreatePDFRequestDTO } from "../../application/dto/CreatePDFRequest.dto.js";
+
+import { PDFPrismaRepository } from "../../../infra/database/pdf.repository.js";
+import { PDFService } from "../../../infra/pdf/PDF.service.js";
 
 export default class PDFController {
   static async createPDF(request: FastifyRequest, reply: FastifyReply) {
@@ -15,7 +19,7 @@ export default class PDFController {
         });
       }
 
-      const useCase = new CreateUseCase();
+      const useCase = new CreateUseCase(new PDFService(), new PDFPrismaRepository());
       const result = await useCase.execute(body);
 
       return reply.status(201).send(result);
@@ -37,7 +41,7 @@ export default class PDFController {
         });
       }
 
-      const useCase = new GetByUuidUseCase();
+      const useCase = new GetByUuidUseCase(new PDFService(), new PDFPrismaRepository());
       const result = await useCase.execute(uuid);
 
       return reply
@@ -55,7 +59,7 @@ export default class PDFController {
 
   static async listPDFs(request: FastifyRequest, reply: FastifyReply) {
     try {
-      const useCase = new ListUseCase();
+      const useCase = new ListUseCase(new PDFPrismaRepository());
       const result = await useCase.execute();
       return reply.status(200).send(result);
     } catch (error) {

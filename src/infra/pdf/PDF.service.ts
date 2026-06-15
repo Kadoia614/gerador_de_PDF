@@ -1,8 +1,9 @@
 import PDFDocument from "pdfkit";
 import fs from "fs";
 import path from "path";
+import PDFServiceRepository from "../../core/domain/repository/PDFService.repository.js";
 
-export class PDFService {
+export class PDFService implements PDFServiceRepository {
   constructor() {}
 
   async createPDF(
@@ -62,6 +63,7 @@ export class PDFService {
     });
   }
 
+  // não utilizado ainda...
   async PDFToBuffer(path: string): Promise<Buffer> {
     return new Promise((resolve, reject) => {
       const doc = new PDFDocument({ size: "A4", margin: 0 });
