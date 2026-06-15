@@ -1,8 +1,10 @@
 import Fastify from "fastify";
 import swagger from "@fastify/swagger";
 import swaggerUi from "@fastify/swagger-ui";
+import fastifyCors from "@fastify/cors";
 import { PORT } from "./core/env.js";
 import { PDFRouter } from "./core/interface/router/pdf.router.js";
+import corsConfig from "./core/config/corsConfig.js";
 
 const fastify = Fastify({
     logger: {
@@ -17,6 +19,8 @@ const fastify = Fastify({
 })
 
 const port: number = Number(PORT);
+
+fastify.register(corsConfig);
 
 fastify.register(swagger, {
   openapi: {
@@ -37,10 +41,7 @@ fastify.register(swaggerUi, {
   routePrefix: "/docs",
   uiConfig: {
     docExpansion: "list",
-    deepLinking: false,
   },
-  staticCSP: true,
-  exposeRoute: true,
   transformSpecification: (schema, request, reply) => schema,
 });
 
