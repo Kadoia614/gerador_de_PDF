@@ -9,8 +9,9 @@ export interface PDFMetadata {
   name: string;
   path: string;
   size: number;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date | null;
 }
 
 export interface CreatePDFResponseDTO {

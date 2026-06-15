@@ -522,7 +522,7 @@ export const PdfScalarFieldEnum = {
   name: 'name',
   path: 'path',
   size: 'size',
-  createAt: 'createAt',
+  created_at: 'created_at',
   updated_at: 'updated_at',
   deleted_at: 'deleted_at'
 } as const

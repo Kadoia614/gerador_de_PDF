@@ -39,7 +39,7 @@ export type PdfMinAggregateOutputType = {
   name: string | null
   path: string | null
   size: number | null
-  createAt: Date | null
+  created_at: Date | null
   updated_at: Date | null
   deleted_at: Date | null
 }
@@ -49,7 +49,7 @@ export type PdfMaxAggregateOutputType = {
   name: string | null
   path: string | null
   size: number | null
-  createAt: Date | null
+  created_at: Date | null
   updated_at: Date | null
   deleted_at: Date | null
 }
@@ -59,7 +59,7 @@ export type PdfCountAggregateOutputType = {
   name: number
   path: number
   size: number
-  createAt: number
+  created_at: number
   updated_at: number
   deleted_at: number
   _all: number
@@ -79,7 +79,7 @@ export type PdfMinAggregateInputType = {
   name?: true
   path?: true
   size?: true
-  createAt?: true
+  created_at?: true
   updated_at?: true
   deleted_at?: true
 }
@@ -89,7 +89,7 @@ export type PdfMaxAggregateInputType = {
   name?: true
   path?: true
   size?: true
-  createAt?: true
+  created_at?: true
   updated_at?: true
   deleted_at?: true
 }
@@ -99,7 +99,7 @@ export type PdfCountAggregateInputType = {
   name?: true
   path?: true
   size?: true
-  createAt?: true
+  created_at?: true
   updated_at?: true
   deleted_at?: true
   _all?: true
@@ -196,7 +196,7 @@ export type PdfGroupByOutputType = {
   name: string
   path: string
   size: number
-  createAt: Date
+  created_at: Date
   updated_at: Date
   deleted_at: Date | null
   _count: PdfCountAggregateOutputType | null
@@ -229,7 +229,7 @@ export type pdfWhereInput = {
   name?: Prisma.StringFilter<"pdf"> | string
   path?: Prisma.StringFilter<"pdf"> | string
   size?: Prisma.IntFilter<"pdf"> | number
-  createAt?: Prisma.DateTimeFilter<"pdf"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"pdf"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"pdf"> | Date | string
   deleted_at?: Prisma.DateTimeNullableFilter<"pdf"> | Date | string | null
 }
@@ -239,7 +239,7 @@ export type pdfOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   size?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
 }
@@ -252,7 +252,7 @@ export type pdfWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"pdf"> | string
   path?: Prisma.StringFilter<"pdf"> | string
   size?: Prisma.IntFilter<"pdf"> | number
-  createAt?: Prisma.DateTimeFilter<"pdf"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"pdf"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"pdf"> | Date | string
   deleted_at?: Prisma.DateTimeNullableFilter<"pdf"> | Date | string | null
 }, "id">
@@ -262,7 +262,7 @@ export type pdfOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   size?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.pdfCountOrderByAggregateInput
@@ -280,7 +280,7 @@ export type pdfScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"pdf"> | string
   path?: Prisma.StringWithAggregatesFilter<"pdf"> | string
   size?: Prisma.IntWithAggregatesFilter<"pdf"> | number
-  createAt?: Prisma.DateTimeWithAggregatesFilter<"pdf"> | Date | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"pdf"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"pdf"> | Date | string
   deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"pdf"> | Date | string | null
 }
@@ -290,7 +290,7 @@ export type pdfCreateInput = {
   name: string
   path: string
   size: number
-  createAt?: Date | string
+  created_at?: Date | string
   updated_at?: Date | string
   deleted_at?: Date | string | null
 }
@@ -300,7 +300,7 @@ export type pdfUncheckedCreateInput = {
   name: string
   path: string
   size: number
-  createAt?: Date | string
+  created_at?: Date | string
   updated_at?: Date | string
   deleted_at?: Date | string | null
 }
@@ -310,7 +310,7 @@ export type pdfUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   size?: Prisma.IntFieldUpdateOperationsInput | number
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -320,7 +320,7 @@ export type pdfUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   size?: Prisma.IntFieldUpdateOperationsInput | number
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -330,7 +330,7 @@ export type pdfCreateManyInput = {
   name: string
   path: string
   size: number
-  createAt?: Date | string
+  created_at?: Date | string
   updated_at?: Date | string
   deleted_at?: Date | string | null
 }
@@ -340,7 +340,7 @@ export type pdfUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   size?: Prisma.IntFieldUpdateOperationsInput | number
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -350,7 +350,7 @@ export type pdfUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   size?: Prisma.IntFieldUpdateOperationsInput | number
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -360,7 +360,7 @@ export type pdfCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   size?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
 }
@@ -374,7 +374,7 @@ export type pdfMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   size?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
 }
@@ -384,7 +384,7 @@ export type pdfMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   size?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
 }
@@ -420,7 +420,7 @@ export type pdfSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   name?: boolean
   path?: boolean
   size?: boolean
-  createAt?: boolean
+  created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
 }, ExtArgs["result"]["pdf"]>
@@ -430,7 +430,7 @@ export type pdfSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   name?: boolean
   path?: boolean
   size?: boolean
-  createAt?: boolean
+  created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
 }, ExtArgs["result"]["pdf"]>
@@ -440,7 +440,7 @@ export type pdfSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   name?: boolean
   path?: boolean
   size?: boolean
-  createAt?: boolean
+  created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
 }, ExtArgs["result"]["pdf"]>
@@ -450,12 +450,12 @@ export type pdfSelectScalar = {
   name?: boolean
   path?: boolean
   size?: boolean
-  createAt?: boolean
+  created_at?: boolean
   updated_at?: boolean
   deleted_at?: boolean
 }
 
-export type pdfOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "path" | "size" | "createAt" | "updated_at" | "deleted_at", ExtArgs["result"]["pdf"]>
+export type pdfOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "path" | "size" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["pdf"]>
 
 export type $pdfPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "pdf"
@@ -465,7 +465,7 @@ export type $pdfPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     name: string
     path: string
     size: number
-    createAt: Date
+    created_at: Date
     updated_at: Date
     deleted_at: Date | null
   }, ExtArgs["result"]["pdf"]>
@@ -895,7 +895,7 @@ export interface pdfFieldRefs {
   readonly name: Prisma.FieldRef<"pdf", 'String'>
   readonly path: Prisma.FieldRef<"pdf", 'String'>
   readonly size: Prisma.FieldRef<"pdf", 'Int'>
-  readonly createAt: Prisma.FieldRef<"pdf", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"pdf", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"pdf", 'DateTime'>
   readonly deleted_at: Prisma.FieldRef<"pdf", 'DateTime'>
 }

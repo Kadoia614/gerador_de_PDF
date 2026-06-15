@@ -14,7 +14,7 @@ export const PDFRouter: FastifyPluginAsync = async (fastify) => {
                 properties: {
                     name: { type: "string", minLength: 1 },
                     entityData: { type: "object", additionalProperties: true },
-                    modelType: { type: "string", default: "esporte" },
+                    modelType: { type: "string", default: "default" },
                 },
             },
             response: {
