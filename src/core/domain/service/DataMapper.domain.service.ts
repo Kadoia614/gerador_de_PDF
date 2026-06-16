@@ -1,13 +1,14 @@
 // Mapeamento de dados da entidade para posições no PDF
 export class DataMapper {
-  static mapEsporteData(data: Record<string, any>) {
+  static mapEsporteData(data: Record<string, any>, identificador: string | number) {
     // Mapeamento de dados de esporte para o modelo de carteirinha
     return [
       { data: data.name || "Nome não informado", x: 30, y: 53 },
       { data: data.identidade || "Nome não informado", x: 130, y: 84 },
       { data: data.modalidade || "Nome não informado", x: 130, y: 115 },
       { data: data.cadastro || "N/A", x: 130, y: 146 },
-      { data: data.nascimento || "Não informado", x: 130, y: 177 },
+      { data: identificador || "N/A", x: 22, y: 5, fontSize: 8, color: "white" },
+      { data: data.nascimento || "Não informado", x: 130, y: 177, fontSize: 12 },
 
       { data: data.endereco || "Endereço não informado", x: 315, y: 19 },
       { data: data.numero || "N/A", x: 315, y: 53 },
@@ -19,12 +20,12 @@ export class DataMapper {
     ];
   }
 
-  static mapByModelType(modelType: string, data: Record<string, any>) {
+  static mapByModelType(modelType: string, data: Record<string, any>, identificador: string | number) {
     switch (modelType.toLowerCase()) {
       case "esporte":
-        return this.mapEsporteData(data);
+        return this.mapEsporteData(data, identificador);
       default:
-        return this.mapEsporteData(data);
+        return this.mapEsporteData(data, identificador);
     }
   }
 }

@@ -1,8 +1,11 @@
-import path from "path";
-import { DataMapper } from "../../infra/pdf/DataMapper.js";
-import { CreatePDFRequestDTO, CreatePDFResponseDTO } from "./dto/CreatePDFRequest.dto.js";
+import { DataMapper } from "../domain/service/DataMapper.domain.service.js";
+import {
+  CreatePDFRequestDTO,
+  CreatePDFResponseDTO,
+} from "./dto/CreatePDFRequest.dto.js";
 import PDFRepository from "../domain/repository/PDFRepository.repository.js";
 import PDFServiceRepository from "../domain/repository/PDFService.repository.js";
+import CarterinhaPolicy from "../domain/service/CarterinhaPolicy.domain.service.js";
 
 export default class CreateUseCase {
   private pdfService: PDFServiceRepository;
@@ -15,41 +18,24 @@ export default class CreateUseCase {
 
   async execute(request: CreatePDFRequestDTO): Promise<CreatePDFResponseDTO> {
     const modelType = request.modelType || "default";
-    let PDF_PATH
-    let MODELO_PATH
 
-    switch (modelType.toLowerCase()) {
-      case "esporte":
-        PDF_PATH = path.resolve("public/modelos/esporte/carterinhas");
-        MODELO_PATH = path.resolve("public/modelos/esporte/modeloEsporte.png");
-        break;
-      default:
-        console.log("default")
-        throw new Error("Modelo de PDF desconhecido");
-    }
+    const carterinhaPolicy = new CarterinhaPolicy(request.name, modelType);
 
-    const textData = DataMapper.mapByModelType(modelType, request.entityData);
-    const safeName = request.name.replace(/[<>:"/\\|?*]+/g, "-");
-    const fullName = `${safeName}-${modelType}-${Date.now()}`;
-
-    const image = {
-      path: MODELO_PATH,
-      width: 590,
-    };
+    const FULL_NAME = carterinhaPolicy.getName();
+    const { PDF_PATH, FULL_PATH, MODELO_PATH } =
+      carterinhaPolicy.getModelAndPath();
 
     try {
-      const { fullPath, size } = await this.pdfService.createPDF(
-        PDF_PATH,
-        fullName,
-        image,
-        textData,
-      );
+      const pdfRecord = await this.pdfRepository.savePDF(FULL_NAME, FULL_PATH);
 
-      const pdfRecord = await this.pdfRepository.savePDF(
-        fullName,
-        fullPath,
-        size,
-      );
+      const textData = DataMapper.mapByModelType(modelType, request.entityData, pdfRecord.id);
+
+      const image = {
+        path: MODELO_PATH,
+        width: 590,
+      };
+
+      await this.pdfService.createPDF(PDF_PATH, FULL_NAME, image, textData);
 
       return {
         id: pdfRecord.id,

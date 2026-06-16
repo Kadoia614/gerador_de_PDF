@@ -10,7 +10,7 @@ export class PDFService implements PDFServiceRepository {
     dirPath: string,
     name: string,
     image?: { path: string; width: number },
-    text?: { data: string; x: number; y: number }[],
+    text?: { data: string; x: number; y: number, fontSize?: number, color?: string }[],
   ): Promise<{ fullPath: string; size: number }> {
     return new Promise((resolve, reject) => {
       // Garante que o diretório existe
@@ -45,7 +45,8 @@ export class PDFService implements PDFServiceRepository {
         text.forEach((item) => {
           doc
             .font("Times-Roman")
-            .fontSize(12)
+            .fontSize(item.fontSize || 12)
+            .fillColor(item.color || "black")
             .text(item.data, item.x, item.y);
         });
       }

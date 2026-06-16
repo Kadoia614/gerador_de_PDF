@@ -14,12 +14,11 @@ export class PDFPrismaRepository implements PDFRepository {
     });
   }
 
-  async savePDF(name: string, path: string, size: number) {
+  async savePDF(name: string, path: string, ) {
     const newData = await this.prisma.pdf.create({
       data: {
         name,
         path,
-        size,
       },
     });
     return this.toEntity(newData);
@@ -57,7 +56,7 @@ export class PDFPrismaRepository implements PDFRepository {
   }
 
   toEntity(data: PDFMetadata) {
-    const pdf = new PDF(data.id, data.name, data.path, data.size, data.created_at, data.updated_at, data.deleted_at);
+    const pdf = new PDF(data.id, data.name, data.path, data.created_at, data.updated_at, data.deleted_at);
     return pdf;
   }
 

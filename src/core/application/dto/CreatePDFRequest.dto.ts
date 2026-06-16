@@ -8,7 +8,6 @@ export interface PDFMetadata {
   id: string;
   name: string;
   path: string;
-  size: number;
   created_at: Date;
   updated_at: Date;
   deleted_at: Date | null;
