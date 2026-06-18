@@ -12,15 +12,6 @@ datasource db {
   provider = "postgresql"
 }
 
-model pdf {
-  id String @id @default(uuid())
-  name String
-  path String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime?
-}
-
 model carterinha_esporte {
   id String @id @default(uuid())
   name String

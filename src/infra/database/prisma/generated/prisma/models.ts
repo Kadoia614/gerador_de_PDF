@@ -8,6 +8,5 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/pdf.js'
 export type * from './models/carterinha_esporte.js'
 export type * from './commonInputTypes.js'

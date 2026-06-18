@@ -384,7 +384,6 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  pdf: 'pdf',
   carterinha_esporte: 'carterinha_esporte'
 } as const
 
@@ -401,84 +400,10 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "pdf" | "carterinha_esporte"
+    modelProps: "carterinha_esporte"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
-    pdf: {
-      payload: Prisma.$pdfPayload<ExtArgs>
-      fields: Prisma.pdfFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.pdfFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.pdfFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload>
-        }
-        findFirst: {
-          args: Prisma.pdfFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.pdfFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload>
-        }
-        findMany: {
-          args: Prisma.pdfFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload>[]
-        }
-        create: {
-          args: Prisma.pdfCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload>
-        }
-        createMany: {
-          args: Prisma.pdfCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.pdfCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload>[]
-        }
-        delete: {
-          args: Prisma.pdfDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload>
-        }
-        update: {
-          args: Prisma.pdfUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload>
-        }
-        deleteMany: {
-          args: Prisma.pdfDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.pdfUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.pdfUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload>[]
-        }
-        upsert: {
-          args: Prisma.pdfUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$pdfPayload>
-        }
-        aggregate: {
-          args: Prisma.PdfAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregatePdf>
-        }
-        groupBy: {
-          args: Prisma.pdfGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PdfGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.pdfCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PdfCountAggregateOutputType> | number
-        }
-      }
-    }
     carterinha_esporte: {
       payload: Prisma.$carterinha_esportePayload<ExtArgs>
       fields: Prisma.carterinha_esporteFieldRefs
@@ -590,18 +515,6 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-export const PdfScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  path: 'path',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type PdfScalarFieldEnum = (typeof PdfScalarFieldEnum)[keyof typeof PdfScalarFieldEnum]
 
 
 export const Carterinha_esporteScalarFieldEnum = {
@@ -806,7 +719,6 @@ export type PrismaClientOptions = ({
   queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
-  pdf?: Prisma.pdfOmit
   carterinha_esporte?: Prisma.carterinha_esporteOmit
 }
 

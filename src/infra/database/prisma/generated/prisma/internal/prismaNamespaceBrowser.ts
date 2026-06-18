@@ -51,7 +51,6 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  pdf: 'pdf',
   carterinha_esporte: 'carterinha_esporte'
 } as const
 
@@ -69,18 +68,6 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-export const PdfScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  path: 'path',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-} as const
-
-export type PdfScalarFieldEnum = (typeof PdfScalarFieldEnum)[keyof typeof PdfScalarFieldEnum]
 
 
 export const Carterinha_esporteScalarFieldEnum = {
