@@ -1,8 +1,8 @@
 import { PrismaClient } from "./prisma/generated/prisma/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { DATABASE_URL } from "../../core/env.js";
-import { PDFMetadata } from "../../core/application/dto/CreatePDFRequest.dto.js";
-import PDF from "../../core/domain/entity/PDF.js";
+import { PDFMetadata } from "../../core/application/dto/CreateCarterinha.dto.js";
+import PDF from "../../core/domain/entity/Carterinha.js";
 import PDFRepository from "../../core/domain/repository/PDFRepository.repository.js";
 
 export class PDFPrismaRepository implements PDFRepository {

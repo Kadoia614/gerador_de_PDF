@@ -3,7 +3,7 @@ import GetByUuidUseCase from "../../application/getByUuid.use-case.js";
 import CreateUseCase from "../../application/create.use-case.js";
 import ListUseCase from "../../application/list.use-case.js";
 
-import { CreatePDFRequestDTO } from "../../application/dto/CreatePDFRequest.dto.js";
+import { CreatePDFRequestDTO } from "../../application/dto/CreateCarterinha.dto.js";
 
 import { PDFPrismaRepository } from "../../../infra/database/pdf.repository.js";
 import { PDFService } from "../../../infra/pdf/PDF.service.js";

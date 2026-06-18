@@ -1,7 +1,7 @@
-export default class PDF {
+export default class Carterinha {
   id: string;
   name: string;
-  path: string;
+  modelType: string;
   create_at: Date;
   updated_at: Date;
   deleted_at: Date | null;
@@ -9,14 +9,14 @@ export default class PDF {
   constructor(
     id: string,
     name: string,
-    path: string,
+    modelType: string,
     create_at: Date,
     updated_at: Date,
     deleted_at: Date | null,
   ) {
     this.id = id;
     this.name = name;
-    this.path = path;
+    this.modelType = modelType;
     this.create_at = create_at;
     this.updated_at = updated_at;
     this.deleted_at = deleted_at;

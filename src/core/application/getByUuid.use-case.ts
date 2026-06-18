@@ -1,6 +1,5 @@
 import PDFRepository from "../domain/repository/PDFRepository.repository.js";
 import PDFServiceRepository from "../domain/repository/PDFService.repository.js";
-import { GetPDFResponseDTO } from "./dto/CreatePDFRequest.dto.js";
 
 export default class GetByUuidUseCase {
   private pdfService: PDFServiceRepository;
