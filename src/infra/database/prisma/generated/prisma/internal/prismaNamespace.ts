@@ -384,7 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  pdf: 'pdf'
+  pdf: 'pdf',
+  carterinha_esporte: 'carterinha_esporte'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "pdf"
+    modelProps: "pdf" | "carterinha_esporte"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +479,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    carterinha_esporte: {
+      payload: Prisma.$carterinha_esportePayload<ExtArgs>
+      fields: Prisma.carterinha_esporteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.carterinha_esporteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.carterinha_esporteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload>
+        }
+        findFirst: {
+          args: Prisma.carterinha_esporteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.carterinha_esporteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload>
+        }
+        findMany: {
+          args: Prisma.carterinha_esporteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload>[]
+        }
+        create: {
+          args: Prisma.carterinha_esporteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload>
+        }
+        createMany: {
+          args: Prisma.carterinha_esporteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.carterinha_esporteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload>[]
+        }
+        delete: {
+          args: Prisma.carterinha_esporteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload>
+        }
+        update: {
+          args: Prisma.carterinha_esporteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload>
+        }
+        deleteMany: {
+          args: Prisma.carterinha_esporteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.carterinha_esporteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.carterinha_esporteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload>[]
+        }
+        upsert: {
+          args: Prisma.carterinha_esporteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$carterinha_esportePayload>
+        }
+        aggregate: {
+          args: Prisma.Carterinha_esporteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCarterinha_esporte>
+        }
+        groupBy: {
+          args: Prisma.carterinha_esporteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Carterinha_esporteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.carterinha_esporteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Carterinha_esporteCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -527,6 +602,27 @@ export const PdfScalarFieldEnum = {
 } as const
 
 export type PdfScalarFieldEnum = (typeof PdfScalarFieldEnum)[keyof typeof PdfScalarFieldEnum]
+
+
+export const Carterinha_esporteScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  identidade: 'identidade',
+  modalidade: 'modalidade',
+  cadastro: 'cadastro',
+  nascimento: 'nascimento',
+  endereco: 'endereco',
+  numero: 'numero',
+  bairro: 'bairro',
+  cep: 'cep',
+  obs: 'obs',
+  exame: 'exame',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type Carterinha_esporteScalarFieldEnum = (typeof Carterinha_esporteScalarFieldEnum)[keyof typeof Carterinha_esporteScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -711,6 +807,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   pdf?: Prisma.pdfOmit
+  carterinha_esporte?: Prisma.carterinha_esporteOmit
 }
 
 /* Types for Logging */

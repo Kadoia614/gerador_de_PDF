@@ -51,7 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  pdf: 'pdf'
+  pdf: 'pdf',
+  carterinha_esporte: 'carterinha_esporte'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -80,6 +81,27 @@ export const PdfScalarFieldEnum = {
 } as const
 
 export type PdfScalarFieldEnum = (typeof PdfScalarFieldEnum)[keyof typeof PdfScalarFieldEnum]
+
+
+export const Carterinha_esporteScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  identidade: 'identidade',
+  modalidade: 'modalidade',
+  cadastro: 'cadastro',
+  nascimento: 'nascimento',
+  endereco: 'endereco',
+  numero: 'numero',
+  bairro: 'bairro',
+  cep: 'cep',
+  obs: 'obs',
+  exame: 'exame',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type Carterinha_esporteScalarFieldEnum = (typeof Carterinha_esporteScalarFieldEnum)[keyof typeof Carterinha_esporteScalarFieldEnum]
 
 
 export const SortOrder = {

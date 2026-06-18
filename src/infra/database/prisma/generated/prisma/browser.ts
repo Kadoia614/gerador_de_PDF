@@ -22,3 +22,8 @@ export * from './enums.js';
  * 
  */
 export type pdf = Prisma.pdfModel
+/**
+ * Model carterinha_esporte
+ * 
+ */
+export type carterinha_esporte = Prisma.carterinha_esporteModel

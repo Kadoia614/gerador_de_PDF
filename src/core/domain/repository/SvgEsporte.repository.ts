@@ -1,4 +1,4 @@
-import { entityDataEsporteDTO} from "../../application/dto/CreateCarterinha.dto.js";
+import { entityDataEsporteDTO} from "../../application/dto/CreateCarterinhaEsporte.dto.js";
 import { SvgEsporteData } from "../entity/SvgEsporte.js";
 
 export default interface SvgEsporteDataRepository {

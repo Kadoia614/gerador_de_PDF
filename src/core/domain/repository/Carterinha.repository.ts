@@ -1,4 +1,4 @@
-import { CreateCarterinhaRequestDTO, CreateCarterinhaResponseDTO} from "../../application/dto/CreateCarterinha.dto.js";
+import { CreateCarterinhaRequestDTO, CreateCarterinhaResponseDTO} from "../../application/dto/CreateCarterinhaEsporte.dto.js";
 
 export default interface CarterinhaRepository {
     create(data: CreateCarterinhaRequestDTO): Promise<CreateCarterinhaResponseDTO>;

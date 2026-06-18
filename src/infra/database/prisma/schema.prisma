@@ -20,3 +20,21 @@ model pdf {
   updated_at DateTime @updatedAt
   deleted_at DateTime?
 }
+
+model carterinha_esporte {
+  id String @id @default(uuid())
+  name String
+  identidade String?
+  modalidade String?
+  cadastro String?
+  nascimento String?
+  endereco String?
+  numero String?
+  bairro String?
+  cep String?
+  obs String?
+  exame String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
+}
