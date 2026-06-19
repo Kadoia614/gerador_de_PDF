@@ -1,7 +1,7 @@
 services:
-  sap:
+  gerador_pdf:
     image: node:18
-    container_name: sap_prefeitura
+    container_name: gerador_pdf
     build:
       context: ./
       dockerfile: ./Dockerfile
