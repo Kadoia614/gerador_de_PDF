@@ -4,10 +4,11 @@ import CarterinhaEsporteController from "../controller/carterinha-esporte.contro
 export const CarterinhaEsporteRouter: FastifyPluginAsync = async (fastify) => {
   fastify.route({
     method: "POST",
-    url: "/",
+    url: "/render",
     schema: {
-      summary: "Criar carteirinha de esporte",
-      description: "Salva os dados da carteirinha de esporte. O PDF e gerado sob demanda no GET por UUID.",
+      summary: "Renderizar carteirinha de esporte",
+      description:
+        "Gera um PDF de carteirinha de esporte em memoria. A API nao persiste dados.",
       body: {
         type: "object",
         required: ["name", "entityData"],
@@ -33,66 +34,20 @@ export const CarterinhaEsporteRouter: FastifyPluginAsync = async (fastify) => {
         },
       },
       response: {
-        201: {
-          type: "object",
-          properties: {
-            id: { type: "string" },
-            name: { type: "string" },
-            createdAt: { type: "string", format: "date-time" },
-            updatedAt: { type: "string", format: "date-time" },
-          },
-        },
-      },
-    },
-    handler: CarterinhaEsporteController.create,
-  });
-
-  fastify.route({
-    method: "GET",
-    url: "/",
-    schema: {
-      summary: "Listar carteirinhas de esporte",
-      response: {
         200: {
-          type: "array",
-          items: {
-            type: "object",
-            properties: {
-              id: { type: "string" },
-              name: { type: "string" },
-              identidade: { type: ["string", "null"] },
-              modalidade: { type: ["string", "null"] },
-              cadastro: { type: ["string", "null"] },
-              nascimento: { type: ["string", "null"] },
-              endereco: { type: ["string", "null"] },
-              numero: { type: ["string", "null"] },
-              bairro: { type: ["string", "null"] },
-              cep: { type: ["string", "null"] },
-              obs: { type: ["string", "null"] },
-              exame: { type: ["string", "null"] },
-              createdAt: { type: "string", format: "date-time" },
-              updatedAt: { type: "string", format: "date-time" },
+          description: "Arquivo PDF gerado",
+          content: {
+            "application/pdf": {
+              schema: {
+                type: "string",
+                format: "binary",
+              },
             },
           },
         },
       },
     },
-    handler: CarterinhaEsporteController.list,
-  });
-
-  fastify.route({
-    method: "GET",
-    url: "/:uuid",
-    schema: {
-      summary: "Recuperar PDF da carteirinha de esporte",
-      params: {
-        type: "object",
-        required: ["uuid"],
-        properties: {
-          uuid: { type: "string" },
-        },
-      },
-    },
-    handler: CarterinhaEsporteController.getByUuid,
+    handler: CarterinhaEsporteController.render,
   });
 };
+

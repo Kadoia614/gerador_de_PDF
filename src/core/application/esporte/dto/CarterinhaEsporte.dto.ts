@@ -12,37 +12,17 @@ export interface EntityDataEsporteDTO {
   exame?: string | null;
 }
 
-export interface CreateCarterinhaEsporteRequestDTO {
+export interface RenderCarterinhaEsporteRequestDTO {
   name: string;
   entityData: EntityDataEsporteDTO;
 }
 
-export interface CarterinhaEsporteMetadataDTO {
-  id: string;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface CarterinhaEsporteDTO extends CarterinhaEsporteMetadataDTO {
-  identidade: string | null;
-  modalidade: string | null;
-  cadastro: string | null;
-  nascimento: string | null;
-  endereco: string | null;
-  numero: string | null;
-  bairro: string | null;
-  cep: string | null;
-  obs: string | null;
-  exame: string | null;
-}
-
-export interface GetCarterinhaEsporteFileDTO {
-  id: string;
-  name: string;
+export interface RenderCarterinhaEsporteResponseDTO {
   file: Buffer;
+  fileName: string;
   mimeType: "application/pdf";
 }
 
 export type entityDataEsporteDTO = EntityDataEsporteDTO;
-export type CreateSvgEsporteRequestDTO = CreateCarterinhaEsporteRequestDTO;
+export type CreateSvgEsporteRequestDTO = RenderCarterinhaEsporteRequestDTO;
+export type CreateCarterinhaEsporteRequestDTO = RenderCarterinhaEsporteRequestDTO;

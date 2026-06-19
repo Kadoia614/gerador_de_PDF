@@ -13,7 +13,6 @@ function must(name: string): string {
 }
 
 export const NODE_ENV = must("NODE_ENV");
-export const DATABASE_URL = must("DATABASE_URL");
 
 export const API_KEY = must("API_KEY");
 export const CORS_ORIGINS = must("CORS_ORIGINS");
