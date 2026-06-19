@@ -2,8 +2,14 @@ import { PDFDocument } from "pdf-lib";
 import sharp from "sharp";
 import * as fs from "fs";
 
-const LARGURA_CARTEIRINHA = 998;
-const ALTURA_CARTEIRINHA = 344;
+const LARGURA_MODELO_CARTEIRINHA = 998;
+const ALTURA_MODELO_CARTEIRINHA = 344;
+const LARGURA_A4 = 595.28;
+const ALTURA_A4 = 841.89;
+const LARGURA_CARTEIRINHA = LARGURA_A4;
+const ALTURA_CARTEIRINHA =
+  (LARGURA_CARTEIRINHA * ALTURA_MODELO_CARTEIRINHA) /
+  LARGURA_MODELO_CARTEIRINHA;
 
 export default class MontarSvgEsporte {
   async compilarCarteirinha(
@@ -24,20 +30,19 @@ export default class MontarSvgEsporte {
     }
 
     const pngCarteirinha = await sharp(Buffer.from(conteudoSvg))
-      .resize(LARGURA_CARTEIRINHA, ALTURA_CARTEIRINHA, { fit: "fill" })
+      .resize(LARGURA_MODELO_CARTEIRINHA, ALTURA_MODELO_CARTEIRINHA, {
+        fit: "fill",
+      })
       .png()
       .toBuffer();
 
     const documentoPdf = await PDFDocument.create();
-    const pagina = documentoPdf.addPage([
-      LARGURA_CARTEIRINHA,
-      ALTURA_CARTEIRINHA,
-    ]);
+    const pagina = documentoPdf.addPage([LARGURA_A4, ALTURA_A4]);
     const imagemCarteirinha = await documentoPdf.embedPng(pngCarteirinha);
 
     pagina.drawImage(imagemCarteirinha, {
       x: 0,
-      y: 0,
+      y: ALTURA_A4 - ALTURA_CARTEIRINHA,
       width: LARGURA_CARTEIRINHA,
       height: ALTURA_CARTEIRINHA,
     });
