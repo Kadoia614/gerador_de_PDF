@@ -14,7 +14,7 @@ services:
           memory: 256M
     environment:
       NODE_ENV: ${NODE_ENV}
-      API_KEY: ${SECRET_KEY}
+      API_KEY: ${API_KEY}
 
       MAIL_ADRESS: ${MAIL_ADRESS}
       MAIL_PASSWORD: ${MAIL_PASSWORD}
