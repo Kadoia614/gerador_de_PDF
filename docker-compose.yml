@@ -28,7 +28,7 @@ services:
     networks:
       dokploy-network:
         aliases:
-          - sap_prefeitura
+          - gerador_pdf
 networks:
   dokploy-network:
     external: true
