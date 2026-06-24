@@ -24,6 +24,7 @@ export default class MontarSvgEsporte {
     }
 
     let conteudoSvg = fs.readFileSync(pathModelo, "utf8");
+    conteudoSvg = this.inserirFoto(conteudoSvg, payload.foto);
 
     for (const [key, value] of Object.entries(payload)) {
       conteudoSvg = conteudoSvg.replaceAll(`{{${key}}}`, String(value ?? ""));
@@ -51,5 +52,17 @@ export default class MontarSvgEsporte {
     // fs.unlinkSync(fotoArquivo.path);
 
     return Buffer.from(await documentoPdf.save());
+  }
+
+  private inserirFoto(conteudoSvg: string, foto?: string | null): string {
+    const fotoNormalizada = String(foto || "").trim();
+
+    if (!fotoNormalizada) {
+      return conteudoSvg;
+    }
+
+    const fotoSvg = `<image x="34.425" y="133.223" width="146.824" height="193.733" preserveAspectRatio="xMidYMid slice" href="${fotoNormalizada}" />`;
+
+    return conteudoSvg.replace("</svg>", `${fotoSvg}</svg>`);
   }
 }

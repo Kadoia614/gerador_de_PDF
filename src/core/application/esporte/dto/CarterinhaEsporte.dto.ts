@@ -10,6 +10,7 @@ export interface EntityDataEsporteDTO {
   cep?: string | null;
   obs?: string | null;
   exame?: string | null;
+  foto?: string | null;
 }
 
 export interface RenderCarterinhaEsporteRequestDTO {

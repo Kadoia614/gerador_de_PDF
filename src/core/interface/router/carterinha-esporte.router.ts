@@ -29,6 +29,10 @@ export const CarterinhaEsporteRouter: FastifyPluginAsync = async (fastify) => {
               cep: { type: "string" },
               obs: { type: "string" },
               exame: { type: "string" },
+              foto: {
+                type: "string",
+                description: "Data URL base64 da foto do atleta",
+              },
             },
           },
         },
