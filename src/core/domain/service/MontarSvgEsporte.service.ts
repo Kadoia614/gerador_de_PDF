@@ -24,10 +24,16 @@ export default class MontarSvgEsporte {
     }
 
     let conteudoSvg = fs.readFileSync(pathModelo, "utf8");
+    conteudoSvg = this.normalizarFontes(conteudoSvg);
     conteudoSvg = this.inserirFoto(conteudoSvg, payload.foto);
 
     for (const [key, value] of Object.entries(payload)) {
-      conteudoSvg = conteudoSvg.replaceAll(`{{${key}}}`, String(value ?? ""));
+      if (key === "foto") continue;
+
+      conteudoSvg = conteudoSvg.replaceAll(
+        `{{${key}}}`,
+        this.escapeXmlText(String(value ?? "")),
+      );
     }
 
     const pngCarteirinha = await sharp(Buffer.from(conteudoSvg))
@@ -52,6 +58,25 @@ export default class MontarSvgEsporte {
     // fs.unlinkSync(fotoArquivo.path);
 
     return Buffer.from(await documentoPdf.save());
+  }
+
+  private normalizarFontes(conteudoSvg: string): string {
+    return conteudoSvg
+      .replaceAll("font-family:Arial", "font-family:'Liberation Sans', 'DejaVu Sans', Arial, sans-serif")
+      .replaceAll("font-family:Corbel", "font-family:'Liberation Sans', 'DejaVu Sans', sans-serif")
+      .replaceAll("font-family:'Microsoft Tai Le'", "font-family:'Liberation Sans', 'DejaVu Sans', sans-serif")
+      .replaceAll("-inkscape-font-specification:'Arial Bold'", "-inkscape-font-specification:'Liberation Sans Bold'")
+      .replaceAll("-inkscape-font-specification:'Arial, Normal'", "-inkscape-font-specification:'Liberation Sans'")
+      .replaceAll("-inkscape-font-specification:Corbel", "-inkscape-font-specification:'Liberation Sans'")
+      .replaceAll("-inkscape-font-specification:'Corbel Bold'", "-inkscape-font-specification:'Liberation Sans Bold'")
+      .replaceAll("-inkscape-font-specification:'Microsoft Tai Le'", "-inkscape-font-specification:'Liberation Sans'");
+  }
+
+  private escapeXmlText(value: string): string {
+    return value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
   }
 
   private inserirFoto(conteudoSvg: string, foto?: string | null): string {
