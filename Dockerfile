@@ -2,32 +2,22 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copia package.json primeiro (melhora cache)
 COPY package*.json ./
-
-# Instala TODAS dependências (incluindo dev)
 RUN npm install
 
-# Copia resto do projeto
 COPY . .
-
-# Compila TypeScript
 RUN npm run build
 
 FROM node:22-alpine
 
 WORKDIR /app
 
-# Copia apenas dependências de produção
 COPY package*.json ./
-
 RUN npm install --omit=dev
 
-# Copia build já compilado
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/public ./public
 
-# Expõe porta
 EXPOSE 3000
 
-# Sobe aplicação
 CMD ["npm", "start"]
